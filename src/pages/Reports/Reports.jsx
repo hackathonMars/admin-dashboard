@@ -1,3 +1,4 @@
+// Reports.jsx
 import React from 'react';
 import useFetch from '../../components/useFetch/useFetch';
 import { FaTrashAlt } from 'react-icons/fa';
@@ -9,7 +10,7 @@ const Reports = () => {
     const handleDelete = async (id) => {
         try {
             await axios.delete(`http://localhost:3007/reports/${id}`);
-            setData(data.filter(report => report.id !== id));
+            setData(prevData => prevData.filter(report => report.id !== id));
         } catch (err) {
             console.error("Failed to delete report:", err);
         }
@@ -19,7 +20,7 @@ const Reports = () => {
     if (error) return <div className="error">Error: {error.message}</div>;
 
     return (
-        <div className="overflow-x-auto">
+        <div className="overflow-x-auto flex justify-center items-center mx-auto">
             <table className="table table-zebra w-full">
                 <thead>
                     <tr>
@@ -36,10 +37,10 @@ const Reports = () => {
                     {data && data.map(report => (
                         <tr key={report.id}>
                             <th>{report.id}</th>
-                            <td>{new Date(report.date).toLocaleString()}</td>
+                            <td className='max-w-[150px]'>{new Date(report.date).toLocaleString()}</td>
                             <td>{report.type}</td>
-                            <td>{report.location}</td>
-                            <td className='text-red-700'>{report.description}</td>
+                            <td className='max-w-[250px]'>{report.location}</td>
+                            <td className='text-red-700 text-center'>{report.description}</td>
                             <td>{report.number}</td>
                             <td>
                                 <button

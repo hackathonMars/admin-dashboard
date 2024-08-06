@@ -107,6 +107,21 @@ const Dashboard = () => {
     }
   };
 
+  const translate = (messageType) => {
+    switch (messageType) {
+      case 'police':
+        return 'службу полиции';
+      case 'garbage':
+        return 'службу очистки';
+      case 'fire':
+        return 'пожарную службу';
+      case 'medical':
+        return 'скорую помошь';
+      default:
+        return 'text-white';
+    }
+  }
+
   return (
     <div className="p-6 text-white min-h-screen w-full">
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-6">
@@ -114,7 +129,7 @@ const Dashboard = () => {
           <div key={type} className="bg-gray-900 p-6 rounded-lg shadow-md shadow-slate-300 flex items-center justify-between">
             <div>
               <p className="text-pink-400 font-bold mb-1">В этом месяце:</p>
-              <h2 className="text-xl font-bold">Вызвано <span className={`${getCardColor(type)}`}>{type}</span> :</h2>
+              <h2 className="text-xl font-bold">Вызвано <span className={`${getCardColor(type)}`}>{translate(type)}</span> :</h2>
               <p className="text-lg"><span className='text-gray-400'>Общее</span>: {messageTypeCounts[type]}</p>
             </div>
             {getIcon(type)}

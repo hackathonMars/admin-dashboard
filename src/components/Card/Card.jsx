@@ -27,7 +27,6 @@ const Card = ({ message, handleStatusChange, getCardColor, truncateDescription }
       <p className="text-gray-300 text-xs sm:text-sm mb-1 flex items-center gap-1"><CiLocationOn />
         Аддрес: {message.location}</p>
       <p className="text-amber-50 text-xs sm:text-sm mb-4 flex items-center gap-1">
-        <CiTextAlignCenter />
         {truncateDescription(message.description, 50)}
       </p>
       <div className="flex justify-between items-center mb-2">
