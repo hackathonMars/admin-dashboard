@@ -110,13 +110,13 @@ const Dashboard = () => {
   const translate = (messageType) => {
     switch (messageType) {
       case 'police':
-        return 'службу полиции';
+        return 'служба полиции';
       case 'garbage':
-        return 'службу очистки';
+        return 'служба очистки';
       case 'fire':
-        return 'пожарную службу';
+        return 'пожарная служба';
       case 'medical':
-        return 'скорую помошь';
+        return 'скорая помошь';
       default:
         return 'text-white';
     }
@@ -129,8 +129,7 @@ const Dashboard = () => {
           <div key={type} className="bg-gray-900 p-6 rounded-lg shadow-md shadow-slate-300 flex items-center justify-between">
             <div>
               <p className="text-pink-400 font-bold mb-1">В этом месяце:</p>
-              <h2 className="text-xl font-bold">Вызвано <span className={`${getCardColor(type)}`}>{translate(type)}</span> :</h2>
-              <p className="text-lg"><span className='text-gray-400'>Общее</span>: {messageTypeCounts[type]}</p>
+              <h2 className="text-xl font-bold">Вызвано <span className={`${getCardColor(type)}`}>{translate(type)}</span> : <span>{messageTypeCounts[type]}</span></h2>
             </div>
             {getIcon(type)}
           </div>
