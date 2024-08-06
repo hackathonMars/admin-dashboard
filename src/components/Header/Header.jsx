@@ -28,30 +28,16 @@ const Header = () => {
                 />
               </svg>
             </div>
-            <ul
-              tabIndex={0}
-              className="menu menu-sm dropdown-content bg-base-100 rounded-box z-[1] mt-3 w-52 p-2 shadow"
-            >
-              <li>
-                <a>Dashboard</a>
-              </li>
-              <li>
-                <a>Messages</a>
-              </li>
-              <li>
-                <a>Settings</a>
-              </li>
-            </ul>
           </div>
         </div>
         <div className="navbar-center hidden md:flex">
-          <a className="text-lg md:text-2xl font-semibold">Welcome Back!</a>
+          <a className="text-lg md:text-2xl font-semibold">Добро пожаловать!</a>
         </div>
         <div className="navbar-end flex-none gap-2">
           <div className="form-control hidden sm:block">
             <input
-              type="text"
-              placeholder="Search"
+              type="search"
+              placeholder="Искать..."
               className="input input-bordered w-24 md:w-auto"
             />
           </div>
@@ -107,15 +93,6 @@ const Header = () => {
               tabIndex={0}
               className="menu menu-sm dropdown-content bg-base-100 rounded-box z-[1] mt-3 w-52 p-2 shadow"
             >
-              <li>
-                <a className="justify-between">
-                  Profile
-                  <span className="badge">New</span>
-                </a>
-              </li>
-              <li>
-                <a>Settings</a>
-              </li>
               <li>
                 <a onClick={logout}>Logout</a>
               </li>

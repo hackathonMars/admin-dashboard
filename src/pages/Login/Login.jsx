@@ -18,7 +18,7 @@ const Login = () => {
         const success = await login(name, password);
         setLoading(false);
         if (success) {
-            navigate('/callings');
+            navigate('/dashboard');
         } else {
             alert('Invalid credentials');
         }
@@ -27,21 +27,21 @@ const Login = () => {
     return (
         <div className="flex justify-center w-full items-center min-h-screen relative">
             <div className="border bg-[#16072366] p-16 rounded-lg shadow-xl w-full max-w-2xl z-10">
-                <h1 className="text-4xl font-bold mb-10 text-center">Login</h1>
+                <h1 className="text-4xl font-bold mb-10 text-center">Авторизация</h1>
                 <form onSubmit={handleSubmit}>
                     <div className="mb-4">
-                        <label htmlFor="name" className="block text-gray-700">Your Name:</label>
-                        <input type="text" id="name" name="name" value={name} onChange={(e) => setName(e.target.value)} placeholder="Enter Your Name" className="w-full p-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-700" required />
+                        <label htmlFor="name" className="block text-gray-700">Ваше Имя:</label>
+                        <input type="text" id="name" name="name" value={name} onChange={(e) => setName(e.target.value)} placeholder="Введите ваше имя" className="w-full p-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-700" required />
                     </div>
                     <div className="mb-4">
-                        <label htmlFor="password" className="block text-gray-700">Password</label>
-                        <input type="password" id="password" name="password" value={password} onChange={(e) => setPassword(e.target.value)} placeholder="Password" className="w-full p-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-700" required />
+                        <label htmlFor="password" className="block text-gray-700">Пароль:</label>
+                        <input type="password" id="password" name="password" value={password} onChange={(e) => setPassword(e.target.value)} placeholder="Введите пароль" className="w-full p-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-700" required />
                     </div>
                     <button type="submit" className="cursor-pointer mt-8 w-full bg-[#1b092b] outline outline-[#5c0ca7] text-white font-normal py-2 rounded-lg flex justify-center items-center">
                         {loading ? (
                             <span className="loading loading-spinner"></span>
                         ) : (
-                            'Sign In'
+                            'Войти'
                         )}
                     </button>
                 </form>

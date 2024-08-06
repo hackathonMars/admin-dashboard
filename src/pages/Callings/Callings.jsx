@@ -3,6 +3,7 @@ import useFetch from '../../components/useFetch/useFetch';
 import BreadCrumb from '../../components/Breadcrumb/BreadCrumb';
 import axios from 'axios';
 import Card from '../../components/Card/Card';
+import StatusButton from '../../components/StatusButton/StatusButton';
 
 const Callings = () => {
   const { data, loading, error } = useFetch('http://localhost:3007/messages');
@@ -23,16 +24,17 @@ const Callings = () => {
   }
 
   if (error) {
-    return <div className="text-center text-red-500">Error: {error.message}</div>;
+    return <div className="text-center text-red-500">Ошибка: {error.message}</div>;
   }
 
   const handleStatusChange = async (id, newStatus) => {
+    const newResponse = responseMessages[newStatus];
     try {
-      await axios.patch(`http://localhost:3007/messages/${id}`, { status: newStatus });
+      await axios.patch(`http://localhost:3007/messages/${id}`, { status: newStatus, response: newResponse });
 
       setMessages((prevMessages) =>
         prevMessages.map((message) =>
-          message.id === id ? { ...message, status: newStatus } : message
+          message.id === id ? { ...message, status: newStatus, response: newResponse } : message
         )
       );
     } catch (error) {
@@ -58,12 +60,20 @@ const Callings = () => {
   const truncateDescription = (text, maxLength) =>
     text.length > maxLength ? `${text.substring(0, maxLength - 3)}...` : text;
 
+  const responseMessages = {
+    Прочитано: 'Ваш Запрос Обрабатывается',
+    Обрабатывается: 'Ваш Запрос Обрабатывается',
+    Выполнено: 'Ваш Запрос Выполнен',
+    Отказано: 'Ваш Запрос Отклонен',
+  };
+
+
   return (
     <div className="p-4">
       <div className="flex flex-col sm:flex-row items-center justify-between">
         <div>
-          <h1 className="text-3xl sm:text-4xl font-bold mb-2">Messages</h1>
-          <BreadCrumb path={"Callings"} />
+          <h1 className="text-3xl sm:text-4xl font-bold mb-2">Вызовы</h1>
+          <BreadCrumb path={"Вызовы"} />
         </div>
       </div>
       {messages && messages.length > 0 ? (
@@ -75,11 +85,21 @@ const Callings = () => {
               handleStatusChange={handleStatusChange}
               getCardColor={getCardColor}
               truncateDescription={truncateDescription}
-            />
+            >
+              <div className="flex gap-2 mt-2">
+                {Object.keys(responseMessages).map((status) => (
+                  <StatusButton
+                    key={status}
+                    label={status}
+                    onClick={() => handleStatusChange(message.id, status)}
+                  />
+                ))}
+              </div>
+            </Card>
           ))}
         </div>
       ) : (
-        <div className="text-center">No messages found.</div>
+        <div className="text-center">В данный момент нет вызовов</div>
       )}
     </div>
   );

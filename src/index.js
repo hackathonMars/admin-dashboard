@@ -26,6 +26,13 @@ const Callings = Loadable(
     }))
   )
 );
+const Reports = Loadable(
+  lazy(() =>
+    import("./pages/main").then((module) => ({
+      default: module.Reports,
+    }))
+  )
+);
 const Login = Loadable(
   lazy(() =>
     import("./pages/main").then((module) => ({ default: module.Login }))
@@ -44,6 +51,7 @@ const router = createBrowserRouter([
         children: [
           { path: "dashboard", element: <Dashboard /> },
           { path: "callings", element: <Callings /> },
+          { path: "reports", element: <Reports /> },
         ],
       },
       { path: "*", element: <Navigate to="/login" replace /> },

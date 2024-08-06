@@ -28,15 +28,17 @@ const Dashboard = () => {
   const { data, loading, error } = useFetch('http://localhost:3007/messages');
 
   if (loading) {
-    return <div>Loading...</div>;
+    return <div className="flex justify-center items-center min-h-screen w-screen">
+      <span className="loading loading-spinner text-[#FD749B]"></span>
+    </div>;
   }
 
   if (error) {
-    return <div>Error: {error.message}</div>;
+    return <div>Ошибка: {error.message}</div>;
   }
 
   if (!data) {
-    return <div>No data available</div>;
+    return <div>Нету данных</div>;
   }
 
   const messageTypeCounts = data.reduce((acc, message) => {
@@ -111,9 +113,9 @@ const Dashboard = () => {
         {Object.keys(messageTypeCounts).map((type) => (
           <div key={type} className="bg-gray-900 p-6 rounded-lg shadow-md shadow-slate-300 flex items-center justify-between">
             <div>
-              <p className="text-pink-400 font-bold mb-1">In this month:</p>
-              <h2 className="text-xl font-bold">Callings for <span className={`${getCardColor(type)}`}>{type}</span> :</h2>
-              <p className="text-lg">Total: {messageTypeCounts[type]}</p>
+              <p className="text-pink-400 font-bold mb-1">В этом месяце:</p>
+              <h2 className="text-xl font-bold">Вызвано <span className={`${getCardColor(type)}`}>{type}</span> :</h2>
+              <p className="text-lg"><span className='text-gray-400'>Общее</span>: {messageTypeCounts[type]}</p>
             </div>
             {getIcon(type)}
           </div>
